@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Login | GirlMath{% endblock %}
+{% block header %}Welcome Back 💖{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+  <h2>Log in to Your GirlMath Account 💅</h2>
+  <p class="subtitle">Track your spending, update goals & stay financially fabulous 💸</p>
+
+  <form action="{{ url_for('login') }}" method="POST" class="auth-form">
+    <!-- 🔒 CSRF Token -->
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+    <label for="username">Username</label>
+    <input type="text" name="username" id="username" placeholder="Enter your username" required>
+
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password" placeholder="Enter your password" required>
+
+    <button type="submit">Login ✨</button>
+  </form>
+
+  <p class="switch-link">
+    Don’t have an account yet?
+    <a href="{{ url_for('register') }}">Sign up here 💕</a>
+  </p>
+</div>
+{% endblock %}

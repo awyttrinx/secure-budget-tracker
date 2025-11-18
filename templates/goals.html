@@ -1,28 +1,49 @@
 {% extends "base.html" %}
 {% block title %}Goals | GirlMath{% endblock %}
-{% block header %}Goals 💫{% endblock %}
+{% block header %}Financial Goals 🎯{% endblock %}
 
 {% block content %}
-<section class="overview">
-  {% for goal in goals %}
-    <div class="card">
-      <h3>{{ goal.name }}</h3>
-      <p>Saved ${{ goal.saved }} of ${{ goal.target }}</p>
-      <div class="progress">
-        <div class="bar" style="width:{{ (goal.saved / goal.target * 100)|round(0) }}%"></div>
-      </div>
-    </div>
-  {% else %}
-    <p>No goals added yet — dream big, babe 💕</p>
-  {% endfor %}
+<section class="summary">
+  <h3>Your Goals</h3>
+  <p>Track your progress and stay motivated 💪</p>
 </section>
 
-<section class="add-goal">
-  <h2>Add a new goal ✨</h2>
-  <form action="#" method="POST" class="add-form">
+<section class="goals-container">
+  {% if goals %}
+    {% for goal in goals %}
+      <div class="goal-card">
+        <h3>{{ goal.name }}</h3>
+        <p>Saved ${{ "%.2f"|format(goal.saved) }} of ${{ "%.2f"|format(goal.target) }}</p>
+        <div class="progress-bar">
+          <div class="progress" style="width: {{ goal.progress() }}%"></div>
+        </div>
+
+        <form action="{{ url_for('update_goal', id=goal.id) }}" method="POST">
+          <input 
+            type="number" 
+            step="0.01" 
+            name="saved_amount" 
+            placeholder="Update saved amount"
+            value="{{ goal.saved }}"
+            required>
+          <button type="submit">Update 💾</button>
+        </form>
+
+        <a href="{{ url_for('delete_goal', id=goal.id) }}" class="delete-btn">Delete ❌</a>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p class="no-goals">No goals added yet — dream big, babe 💕</p>
+  {% endif %}
+</section>
+
+<section class="form-card">
+  <h3>Add a New Goal ✨</h3>
+  <form action="{{ url_for('goals') }}" method="POST">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
     <input type="text" name="goal_name" placeholder="Goal name" required>
     <input type="number" step="0.01" name="target_amount" placeholder="Target amount" required>
-    <button type="submit" disabled>Coming Soon 💅</button>
+    <button type="submit">Add Goal</button>
   </form>
 </section>
 {% endblock %}

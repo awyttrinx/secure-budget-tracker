@@ -5,33 +5,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}GirlMath Dashboard{% endblock %}</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   {% block head_scripts %}{% endblock %}
 </head>
+
+
 <body>
   <!-- Sidebar -->
-  <div class="sidebar">
-    <h2>GirlMath 💸</h2>
-    <ul>
-      <li class="{% if request.path == '/' %}active{% endif %}">
-        <a href="/">Dashboard</a>
-      </li>
-      <li class="{% if request.path == '/analytics' %}active{% endif %}">
-        <a href="/analytics">Analytics</a>
-      </li>
-      <li class="{% if request.path == '/goals' %}active{% endif %}">
-        <a href="/goals">Goals</a>
-      </li>
-    </ul>
-  </div>
+  <aside class="sidebar">
+    <div>
+      <h1>💸 GirlMath Budget Tracker 💸</h1>
+      <nav>
+        <a href="{{ url_for('index') }}" class="{% if request.path == '/' %}active{% endif %}">💖 Home</a>
+        <a href="{{ url_for('analytics') }}" class="{% if request.path == '/analytics' %}active{% endif %}">📊 Analytics</a>
+        <a href="{{ url_for('goals') }}" class="{% if request.path == '/goals' %}active{% endif %}">🎯 Goals</a>
+      </nav>
+    </div>
+    <p class="quote">✨ “It’s not spending, it’s investing in happiness.” ✨</p>
+  </aside>
 
-  <!-- Main Content -->
-  <div class="main-content">
+
+  <!-- Main content -->
+  <div class="main">
     <header>
-      <h1>{% block header %}Dashboard{% endblock %}</h1>
-      <div class="profile">
-        <img src="https://cdn-icons-png.flaticon.com/512/9131/9131529.png" alt="User">
-      </div>
-    </header>
+  <h2>{% block header %}Total Balance{% endblock %}</h2>
+  {% if current_user.is_authenticated %}
+    <div class="user-info">
+      <span>Hi {{ current_user.username }} 💕</span>
+      <a href="{{ url_for('logout') }}" class="logout-link">Logout</a>
+    </div>
+  {% else %}
+    <div class="user-info">
+      <a href="{{ url_for('login') }}" class="logout-link">Login</a>
+    </div>
+  {% endif %}
+</header>
 
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
@@ -44,6 +52,10 @@
     {% endwith %}
 
     {% block content %}{% endblock %}
+
+    <footer>
+      GirlMath is a lifestyle 💖
+    </footer>
   </div>
 
   {% block scripts %}{% endblock %}

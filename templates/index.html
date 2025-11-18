@@ -1,63 +1,75 @@
-<{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GirlMath Budget Tracker 💅</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <aside class="sidebar">
+        <div>
+            <h1>💸 GirlMath Budget Tracker 💸</h1>
+            <nav>
+                <a href="{{ url_for('index') }}">💖 Home</a>
+                <a href="{{ url_for('analytics') }}">📊 Analytics</a>
+                <a href="{{ url_for('goals') }}">🎯 Goals</a>
+            </nav>
+        </div>
+        <p class="quote">✨ “It’s not spending, it’s investing in happiness.” ✨</p>
+    </aside>
 
-{% block title %}Dashboard | GirlMath{% endblock %}
-{% block header %}Dashboard{% endblock %}
+    <div class="main">
+        <header>
+            <h2>Total Balance</h2>
+            <p>Made with 💕 by Antonia — GirlMath Edition</p>
+        </header>
 
-{% block content %}
-<section class="overview">
-  <div class="card highlight">
-    <h3>Total Balance</h3>
-    <p class="amount">${{ "%.2f"|format(total) }}</p>
-    <small>Spending Progress 💕</small>
-  </div>
+        <section class="summary">
+            <h3>Current Balance</h3>
+            <h2>${{ "%.2f" | format(total) }}</h2>
+            <p>Financial freedom starts with awareness 💫</p>
+        </section>
 
-  <div class="card">
-    <h3>Income</h3>
-    <p class="amount">$4,250.85</p>
-  </div>
+        <!-- SET BALANCE -->
+        <section class="form-card">
+            <h3>Set Account Balance 💰</h3>
+            <form method="POST" action="{{ url_for('set_balance') }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <input type="number" step="0.01" name="balance" placeholder="Enter your total balance" required>
+                <button type="submit">Update Balance</button>
+            </form>
+        </section>
 
-  <div class="card">
-    <h3>Expenses</h3>
-    <p class="amount">$6,005.00</p>
-  </div>
+        <!-- ADD TRANSACTION -->
+        <section class="form-card">
+            <h3>Add a New Transaction 💕</h3>
+            <form method="POST" action="{{ url_for('add_transaction') }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <input type="text" name="description" placeholder="What did you buy?" required>
+                <input type="number" step="0.01" name="amount" placeholder="How much?" required>
+                <button type="submit">Add Transaction</button>
+            </form>
+        </section>
 
-  <div class="card">
-    <h3>Goals</h3>
-    <p>Europe Trip ✈️</p>
-    <div class="progress"><div class="bar" style="width:70%"></div></div>
-  </div>
-</section>
+        <!-- RECENT TRANSACTIONS -->
+        <section class="transactions">
+            <h3>Recent Transactions 💸</h3>
+            <ul>
+                {% for t in transactions %}
+                <li>
+                    <span>{{ t.description }} — ${{ "%.2f"|format(t.amount) }}</span>
+                    <a href="{{ url_for('delete_transaction', id=t.id) }}">✖</a>
+                </li>
+                {% else %}
+                <li>No transactions yet! Start tracking 💅</li>
+                {% endfor %}
+            </ul>
+        </section>
 
-<section class="transactions">
-  <h2>Recent Transactions</h2>
-
-  <form action="{{ url_for('add_transaction') }}" method="POST" class="add-form">
-    <input type="text" name="description" placeholder="What did you buy, babe?" required>
-    <input type="number" step="0.01" name="amount" placeholder="How much?" required>
-    <button type="submit">Add Transaction</button>
-  </form>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Description</th>
-        <th>Amount ($)</th>
-        <th>Date</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for t in transactions %}
-        <tr>
-          <td>{{ t.description }}</td>
-          <td>${{ "%.2f"|format(t.amount) }}</td>
-          <td>{{ t.date.strftime("%Y-%m-%d %H:%M") }}</td>
-          <td><a href="{{ url_for('delete_transaction', id=t.id) }}" class="delete">❌</a></td>
-        </tr>
-      {% else %}
-        <tr><td colspan="4">No transactions yet — treat yourself responsibly 💅</td></tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</section>
-{% endblock %}
+        <footer>
+            GirlMath is a mindset 💖
+        </footer>
+    </div>
+</body>
+</html>

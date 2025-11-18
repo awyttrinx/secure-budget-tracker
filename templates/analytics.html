@@ -7,13 +7,15 @@
 {% endblock %}
 
 {% block content %}
-<section class="analytics">
-  <h2>Spending Breakdown 💖</h2>
+<section class="summary">
+  <h3>Spending Overview</h3>
+  <p>Visualize your spending patterns and track where your money flows 💡</p>
+</section>
+
+<section class="analytics-card">
   <canvas id="spendingChart" width="400" height="200"></canvas>
 </section>
-{% endblock %}
 
-{% block scripts %}
 <script>
   const ctx = document.getElementById('spendingChart');
   const chart = new Chart(ctx, {
@@ -22,17 +24,17 @@
       labels: [{% for t in transactions %}'{{ t.description }}',{% endfor %}],
       datasets: [{
         data: [{% for t in transactions %}{{ t.amount }},{% endfor %}],
-        backgroundColor: ['#ff99b9','#ff7aa9','#ffaac9','#ffd1dc','#ffb6c1'],
+        backgroundColor: ['#c98f86', '#e8dcd2', '#b26b67', '#f2b5a7', '#e2c3b7'],
         borderWidth: 1,
-        borderColor: '#2a2a2a'
+        borderColor: '#faf6f4'
       }]
     },
     options: {
       plugins: {
         legend: {
           labels: {
-            color: '#ffb6c1',
-            font: { family: "Poppins" }
+            color: '#6d4b47',
+            font: { family: "Poppins", size: 14 }
           }
         }
       },
