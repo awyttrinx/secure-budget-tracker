@@ -1,0 +1,194 @@
+/* Girl Math Dashboard — elegant dark theme with soft pink accents */
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background-color: #1e1e1e;
+  color: #f8f8f8;
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 220px;
+  background: #2a2a2a;
+  padding: 30px 20px;
+  color: #ffb6c1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.sidebar h2 {
+  color: #ff99b9;
+  margin-bottom: 40px;
+  font-size: 1.6em;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+.sidebar li {
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  color: #e6e6e6;
+}
+
+.sidebar li.active, .sidebar li:hover {
+  background: #ff99b9;
+  color: #1e1e1e;
+}
+
+.main-content {
+  flex: 1;
+  padding: 40px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  color: #ffb6c1;
+  font-size: 2em;
+}
+
+.profile img {
+  width: 40px;
+  border-radius: 50%;
+  border: 2px solid #ff99b9;
+}
+
+.overview {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin: 40px 0;
+}
+
+.card {
+  background: #2a2a2a;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(255, 153, 185, 0.1);
+}
+
+.card.highlight {
+  background: linear-gradient(145deg, #ff99b9, #ff6fa1);
+  color: #1e1e1e;
+}
+
+.card h3 {
+  margin-top: 0;
+}
+
+.amount {
+  font-size: 1.8em;
+  font-weight: 600;
+  margin: 10px 0;
+}
+
+.progress {
+  background: #3a3a3a;
+  border-radius: 10px;
+  height: 8px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.bar {
+  background: #ff99b9;
+  height: 100%;
+}
+
+.transactions h2 {
+  color: #ffb6c1;
+}
+
+.add-form {
+  margin: 20px 0;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+input, button {
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  font-family: inherit;
+}
+
+input {
+  flex: 1;
+  background: #2e2e2e;
+  color: white;
+}
+
+button {
+  background: #ff99b9;
+  color: #1e1e1e;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #ff7aa9;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th, td {
+  padding: 12px;
+  border-bottom: 1px solid #3a3a3a;
+  text-align: left;
+}
+
+th {
+  color: #ffb6c1;
+}
+
+.delete {
+  color: #ff7aa9;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.delete:hover {
+  text-decoration: underline;
+}
+
+/* Flash messages */
+.messages {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+.messages li {
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 5px;
+}
+
+.messages li.success {
+  background: rgba(255, 182, 193, 0.2);
+  border: 1px solid #ff99b9;
+}
+
+.messages li.error {
+  background: rgba(255, 105, 97, 0.2);
+  border: 1px solid #ff5c8d;
+}

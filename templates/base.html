@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}GirlMath Dashboard{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  {% block head_scripts %}{% endblock %}
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>GirlMath 💸</h2>
+    <ul>
+      <li class="{% if request.path == '/' %}active{% endif %}">
+        <a href="/">Dashboard</a>
+      </li>
+      <li class="{% if request.path == '/analytics' %}active{% endif %}">
+        <a href="/analytics">Analytics</a>
+      </li>
+      <li class="{% if request.path == '/goals' %}active{% endif %}">
+        <a href="/goals">Goals</a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <header>
+      <h1>{% block header %}Dashboard{% endblock %}</h1>
+      <div class="profile">
+        <img src="https://cdn-icons-png.flaticon.com/512/9131/9131529.png" alt="User">
+      </div>
+    </header>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul class="messages">
+          {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </div>
+
+  {% block scripts %}{% endblock %}
+</body>
+</html>

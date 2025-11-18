@@ -1,0 +1,63 @@
+<{% extends "base.html" %}
+
+{% block title %}Dashboard | GirlMath{% endblock %}
+{% block header %}Dashboard{% endblock %}
+
+{% block content %}
+<section class="overview">
+  <div class="card highlight">
+    <h3>Total Balance</h3>
+    <p class="amount">${{ "%.2f"|format(total) }}</p>
+    <small>Spending Progress 💕</small>
+  </div>
+
+  <div class="card">
+    <h3>Income</h3>
+    <p class="amount">$4,250.85</p>
+  </div>
+
+  <div class="card">
+    <h3>Expenses</h3>
+    <p class="amount">$6,005.00</p>
+  </div>
+
+  <div class="card">
+    <h3>Goals</h3>
+    <p>Europe Trip ✈️</p>
+    <div class="progress"><div class="bar" style="width:70%"></div></div>
+  </div>
+</section>
+
+<section class="transactions">
+  <h2>Recent Transactions</h2>
+
+  <form action="{{ url_for('add_transaction') }}" method="POST" class="add-form">
+    <input type="text" name="description" placeholder="What did you buy, babe?" required>
+    <input type="number" step="0.01" name="amount" placeholder="How much?" required>
+    <button type="submit">Add Transaction</button>
+  </form>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Amount ($)</th>
+        <th>Date</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for t in transactions %}
+        <tr>
+          <td>{{ t.description }}</td>
+          <td>${{ "%.2f"|format(t.amount) }}</td>
+          <td>{{ t.date.strftime("%Y-%m-%d %H:%M") }}</td>
+          <td><a href="{{ url_for('delete_transaction', id=t.id) }}" class="delete">❌</a></td>
+        </tr>
+      {% else %}
+        <tr><td colspan="4">No transactions yet — treat yourself responsibly 💅</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}

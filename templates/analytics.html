@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Analytics | GirlMath{% endblock %}
+{% block header %}Spending Analytics 📊{% endblock %}
+
+{% block head_scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+
+{% block content %}
+<section class="analytics">
+  <h2>Spending Breakdown 💖</h2>
+  <canvas id="spendingChart" width="400" height="200"></canvas>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const ctx = document.getElementById('spendingChart');
+  const chart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: [{% for t in transactions %}'{{ t.description }}',{% endfor %}],
+      datasets: [{
+        data: [{% for t in transactions %}{{ t.amount }},{% endfor %}],
+        backgroundColor: ['#ff99b9','#ff7aa9','#ffaac9','#ffd1dc','#ffb6c1'],
+        borderWidth: 1,
+        borderColor: '#2a2a2a'
+      }]
+    },
+    options: {
+      plugins: {
+        legend: {
+          labels: {
+            color: '#ffb6c1',
+            font: { family: "Poppins" }
+          }
+        }
+      },
+      responsive: true,
+      maintainAspectRatio: false
+    }
+  });
+</script>
+{% endblock %}
