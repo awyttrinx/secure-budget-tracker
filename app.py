@@ -195,28 +195,32 @@ def update_goal(id):
 
 # ------------------ AUTH ROUTES ------------------ #
 @app.route("/register", methods=["GET", "POST"])
-existing_user = User.query.filter_by(username=username).first()
 def register():
     if request.method == "POST":
         username = request.form.get("username").strip()
         password = request.form.get("password").strip()
 
+        # Check if fields are empty
         if not username or not password:
             flash("Please fill out all fields.", "error")
             return redirect(url_for("register"))
 
+        # Check if username already exists
         existing_user = User.query.filter_by(username=username).first()
         if existing_user:
             flash("Username already taken.", "error")
             return redirect(url_for("register"))
 
+        # Create new user
         hashed_pw = generate_password_hash(password)
         new_user = User(username=username, password=hashed_pw)
         db.session.add(new_user)
         db.session.commit()
+
         flash("Registration successful! You can now log in.", "success")
         return redirect(url_for("login"))
 
+    # Render registration form
     return render_template("register.html")
 
 
