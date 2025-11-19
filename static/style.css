@@ -507,3 +507,67 @@ footer {
 .error-container .button:hover {
   background-color: #f08a94;
 }
+
+/* ==============================
+   📱 MOBILE OPTIMIZATION
+   ============================== */
+@media (max-width: 768px) {
+  /* Layout-Anpassungen */
+  body {
+    flex-direction: column;
+    font-size: 14px;
+  }
+
+  .sidebar {
+    width: 100%;
+    position: relative;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .sidebar nav a {
+    display: inline-block;
+    margin: 5px;
+    font-size: 0.9rem;
+  }
+
+  .main {
+    margin-left: 0;
+    padding: 10px;
+  }
+
+  header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .user-info {
+    margin-top: 10px;
+  }
+
+  /* Karten & Container */
+  .auth-container,
+  .content-card {
+    width: 100%;
+    margin: 10px 0;
+    padding: 15px;
+  }
+
+  button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  h1, h2, h3 {
+    font-size: 1rem;
+  }
+
+  nav a {
+    font-size: 0.8rem;
+  }
+
+  .quote {
+    display: none; /* Auf sehr kleinen Geräten ausblenden */
+  }
+}
