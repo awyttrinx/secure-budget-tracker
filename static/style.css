@@ -480,3 +480,30 @@ footer {
 .logout-btn:hover {
   background-color: #a26c6c;
 }
+.error-container {
+  text-align: center;
+  padding: 3rem;
+}
+
+.error-container h2 {
+  color: #d66a6a;
+  margin-bottom: 1rem;
+}
+
+.error-container p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.error-container .button {
+  background-color: #f4b6c2;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.error-container .button:hover {
+  background-color: #f08a94;
+}

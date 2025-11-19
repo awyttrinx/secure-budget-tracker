@@ -195,6 +195,7 @@ def update_goal(id):
 
 # ------------------ AUTH ROUTES ------------------ #
 @app.route("/register", methods=["GET", "POST"])
+existing_user = User.query.filter_by(username=username).first()
 def register():
     if request.method == "POST":
         username = request.form.get("username").strip()
@@ -244,9 +245,28 @@ def logout():
     flash("You’ve been logged out.", "info")
     return redirect(url_for("login"))
 
+# ---------------- ERROR HANDLERS ---------------- #
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template("404.html"), 404
+
+
+@app.errorhandler(500)
+def internal_server_error(e):
+    return render_template("500.html"), 500
 
 # ------------------ RUN APP ------------------ #
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()  # <-- muss eingerückt sein (4 Leerzeichen)
     app.run(debug=True)
+
+# ---------------- ERROR HANDLERS ---------------- #
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template("404.html"), 404
+
+
+@app.errorhandler(500)
+def internal_server_error(e):
+    return render_template("500.html"), 500
