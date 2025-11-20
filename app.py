@@ -16,12 +16,10 @@ app = Flask(__name__)
 # 🔒 Sichere Konfiguration
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "fallback-key")
 
-# 🌿 Verbindung zur MongoDB Atlas (mit konkretem DB-Namen!)
-app.config["MONGO_URI"] = (
-    "mongodb+srv://antoniawittrin_db_user:Musikerin911%21"
-    "@cluster0.1nyxnng.mongodb.net/girlmath?retryWrites=true&w=majority&appName=Cluster0"
-)
+# 🌿 Verbindung zur MongoDB Atlas (über Render Environment Variable)
+app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 
+# Initialisiere MongoDB
 mongo = PyMongo(app)
 
 # --- Verbindung testen ---
@@ -271,5 +269,4 @@ def internal_server_error(e):
 
 # ------------------ RUN APP ------------------ #
 if __name__ == "__main__":
-    app.run(debug=True)
-
+    app.run(host="0.0.0.0", port=10000, debug=False)
