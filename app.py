@@ -8,11 +8,13 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 from flask_wtf.csrf import CSRFProtect
 
+import os
+from flask import Flask
+
 # ------------------ APP SETUP ------------------ #
 app = Flask(__name__)
-import os
-app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "fallback-key")
 
+app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "fallback-key")
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///budget.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
@@ -28,6 +30,7 @@ login_manager.init_app(app)
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(200), nullable=False)
     balance = db.Column(db.Float, default=0.0)
     transactions = db.relationship("Transaction", backref="user", lazy=True)
@@ -199,45 +202,53 @@ def update_goal(id):
 def register():
     if request.method == "POST":
         username = request.form.get("username").strip()
+        email = request.form.get("email").strip()
         password = request.form.get("password").strip()
 
         # Check if fields are empty
-        if not username or not password:
+        if not username or not email or not password:
             flash("Please fill out all fields.", "error")
             return redirect(url_for("register"))
 
         # Check if username already exists
-        existing_user = User.query.filter_by(username=username).first()
-        if existing_user:
+        if User.query.filter_by(username=username).first():
             flash("Username already taken.", "error")
+            return redirect(url_for("register"))
+
+        # Check if email already exists
+        if User.query.filter_by(email=email).first():
+            flash("Email is already registered.", "error")
             return redirect(url_for("register"))
 
         # Create new user
         hashed_pw = generate_password_hash(password)
-        new_user = User(username=username, password=hashed_pw)
+        new_user = User(username=username, email=email, password=hashed_pw)
         db.session.add(new_user)
         db.session.commit()
 
         flash("Registration successful! You can now log in.", "success")
         return redirect(url_for("login"))
 
-    # Render registration form
     return render_template("register.html")
 
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        username = request.form.get("username").strip()
+        identifier = request.form.get("username").strip()
         password = request.form.get("password").strip()
-        user = User.query.filter_by(username=username).first()
+
+        # Suche nach Benutzer anhand von Username ODER Email
+        user = User.query.filter(
+            (User.username == identifier) | (User.email == identifier)
+        ).first()
 
         if not user or not check_password_hash(user.password, password):
-            flash("Invalid username or password.", "error")
+            flash("Invalid username/email or password.", "error")
             return redirect(url_for("login"))
 
         login_user(user)
-        flash("Welcome back 💕", "success")
+        flash(f"Welcome back, {user.username} 💕", "success")
         return redirect(url_for("index"))
 
     return render_template("login.html")
