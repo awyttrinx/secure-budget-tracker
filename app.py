@@ -10,7 +10,8 @@ from flask_wtf.csrf import CSRFProtect
 
 # ------------------ APP SETUP ------------------ #
 app = Flask(__name__)
-app.secret_key = "supersecretkey"
+import os
+app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "fallback-key")
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///budget.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -264,13 +265,3 @@ if __name__ == "__main__":
     with app.app_context():
         db.create_all()  # <-- muss eingerückt sein (4 Leerzeichen)
     app.run(debug=True)
-
-# ---------------- ERROR HANDLERS ---------------- #
-@app.errorhandler(404)
-def page_not_found(e):
-    return render_template("404.html"), 404
-
-
-@app.errorhandler(500)
-def internal_server_error(e):
-    return render_template("500.html"), 500
