@@ -1,12 +1,12 @@
 💸 GirlMath Budget Tracker
 
-Empowering women to take control of their finances — one goal at a time.
+Empowering women to take control of their finances.
 
 ⸻
 
 🌟 Overview
 
-The GirlMath Budget Tracker is a web application built to make financial planning, saving, and budgeting more approachable and fun — especially for women who want to understand their spending habits and start building wealth.
+The GirlMath Budget Tracker is a web application built to make financial planning, saving, and budgeting more approachable and fun. Especially for women who want to understand their spending habits and start building wealth.
 
 This project was created as part of the university modules:
 	•	SE_01 – Software Development Basics
@@ -18,7 +18,7 @@ Future versions will include educational features such as how to invest, stock m
 
 ⸻
 
-Features
+Features:
 
 ✅ User Authentication
 	•	Secure registration and login via username or email.
@@ -56,7 +56,7 @@ Features
 
 ⸻
 
-##Technologies Used
+Technologies Used:
 
 Frontend:
 	•	HTML5
@@ -80,7 +80,7 @@ Deployment:
 
 ⸻
 
- Security & Privacy (SE_09)
+ Security & Privacy (SE_09):
 
 The app implements several key security principles:
 	•	Authentication & Authorization — users can only access their own transactions and goals.
@@ -92,7 +92,7 @@ The app implements several key security principles:
 
 ⸻
 
- Mobile Optimization (SE_19)
+ Mobile Optimization (SE_19):
 
 The site is fully responsive and adjusts layout elements for mobile devices:
 	•	Sidebar collapses into a top navigation bar.
@@ -101,7 +101,7 @@ The site is fully responsive and adjusts layout elements for mobile devices:
 
 ⸻
 
-🧩 Software Development Process (SE_01)
+🧩 Software Development Process (SE_01):
 
 Throughout the project:
 	•	Version control via Git & GitHub.
@@ -112,7 +112,7 @@ Throughout the project:
 
 ⸻
 
-Future Plans
+Future Plans:
 
 🚀 Phase 2:
 	•	Add educational resources (articles, videos, and interactive finance tips).
@@ -122,7 +122,7 @@ Future Plans
 
 ⸻
 
-Author
+Author:
 
 Antonia Wittrin
 	•	🌍 Passionate about financial education & women empowerment.
