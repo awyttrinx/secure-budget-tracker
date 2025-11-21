@@ -12,13 +12,15 @@
   {% if goals %}
     {% for goal in goals %}
       <div class="goal-card">
-        <h3>{{ goal.name }}</h3>
+        <a href="{{ url_for('goal_detail', id=goal._id) }}" class="goal-link">
+          <h3>{{ goal.name }}</h3>
+        </a>
         <p>Saved ${{ "%.2f"|format(goal.saved) }} of ${{ "%.2f"|format(goal.target) }}</p>
         <div class="progress-bar">
-          <div class="progress" style="width: {{ goal.progress() }}%"></div>
+          <div class="progress" style="width: {{ (goal.saved / goal.target) * 100 if goal.target > 0 else 0 }}%;"></div>
         </div>
 
-        <form action="{{ url_for('update_goal', id=goal.id) }}" method="POST">
+        <form action="{{ url_for('update_goal', id=goal._id) }}" method="POST">
           <input 
             type="number" 
             step="0.01" 
@@ -29,7 +31,7 @@
           <button type="submit">Update 💾</button>
         </form>
 
-        <a href="{{ url_for('delete_goal', id=goal.id) }}" class="delete-btn">Delete ❌</a>
+        <a href="{{ url_for('delete_goal', id=goal._id) }}" class="delete-btn">Delete ❌</a>
       </div>
     {% endfor %}
   {% else %}
