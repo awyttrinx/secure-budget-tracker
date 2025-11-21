@@ -571,3 +571,69 @@ footer {
     display: none; /* Auf sehr kleinen Geräten ausblenden */
   }
 }
+
+/* ---------------- GOAL DETAIL PAGE ---------------- */
+.goal-detail {
+  background-color: #fff7f9;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  max-width: 600px;
+  margin: 2rem auto;
+  text-align: center;
+}
+
+.goal-detail h2 {
+  font-size: 1.8rem;
+  color: #4a2c2a;
+  margin-bottom: 0.5rem;
+}
+
+.goal-detail p {
+  color: #6b4f4f;
+  font-size: 1rem;
+  margin: 0.4rem 0;
+}
+
+.progress-bar {
+  background-color: #f0e2e7;
+  border-radius: 12px;
+  height: 16px;
+  width: 100%;
+  margin: 1rem 0;
+  overflow: hidden;
+}
+
+.progress {
+  background: linear-gradient(90deg, #ff9cb5, #ff6b9f);
+  height: 100%;
+  border-radius: 12px;
+  transition: width 0.5s ease-in-out;
+}
+
+.back-btn {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 10px;
+  background-color: #ff9cb5;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+.back-btn:hover {
+  background-color: #ff6b9f;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .goal-detail {
+    padding: 1.2rem;
+  }
+
+  .goal-detail h2 {
+    font-size: 1.5rem;
+  }
+}
