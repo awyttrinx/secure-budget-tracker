@@ -106,19 +106,31 @@ def add_transaction():
 @app.route("/delete/<id>")
 @login_required
 def delete_transaction(id):
-    transaction = mongo.db.transactions.find_one({"_id": ObjectId(id)})
-    if not transaction or transaction["user_id"] != current_user.id:
-        flash("Unauthorized action.", "error")
+    try:
+        transaction = mongo.db.transactions.find_one({"_id": ObjectId(id)})
+        if not transaction:
+            flash("Transaction not found.", "error")
+            return redirect(url_for("index"))
+
+        if transaction["user_id"] != current_user.id:
+            flash("Unauthorized action.", "error")
+            return redirect(url_for("index"))
+
+        # Restore balance before deleting
+        mongo.db.users.update_one(
+            {"_id": ObjectId(current_user.id)},
+            {"$inc": {"balance": transaction["amount"]}}
+        )
+
+        # Delete the transaction
+        mongo.db.transactions.delete_one({"_id": ObjectId(id)})
+        flash("Transaction deleted and balance restored ✅", "success")
         return redirect(url_for("index"))
 
-    mongo.db.transactions.delete_one({"_id": ObjectId(id)})
-    mongo.db.users.update_one(
-        {"_id": ObjectId(current_user.id)},
-        {"$inc": {"balance": transaction["amount"]}}
-    )
-
-    flash("Transaction deleted and balance restored.", "success")
-    return redirect(url_for("index"))
+    except Exception as e:
+        print("❌ Error deleting transaction:", e)
+        flash("An error occurred while deleting the transaction.", "error")
+        return redirect(url_for("index"))
 
 
 @app.route("/analytics")
