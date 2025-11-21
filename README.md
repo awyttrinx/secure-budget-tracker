@@ -1,10 +1,10 @@
-💸 GirlMath Budget Tracker
+#💸 GirlMath Budget Tracker
 
 Empowering women to take control of their finances.
 
 ⸻
 
-🌟 Overview
+#🌟 Overview
 
 The GirlMath Budget Tracker is a web application built to make financial planning, saving, and budgeting more approachable and fun. Especially for women who want to understand their spending habits and start building wealth.
 
@@ -18,7 +18,7 @@ Future versions will include educational features such as how to invest, stock m
 
 ⸻
 
-Features:
+#Features:
 
 ✅ User Authentication
 	•	Secure registration and login via username or email.
@@ -66,47 +66,46 @@ Features:
 
 ⸻
 Local Development Setup
-1.	Clone the Repository
+1.Clone the Repository
 git clone https://github.com/<your-username>/secure-budget-tracker.git
 cd secure-budget-tracker
 
-2.	Create & Activate a Virtual Environment
+2.Create & Activate a Virtual Environment
 python3 -m venv venv
 source venv/bin/activate
 
-3. Install Dependencies
+3.Install Dependencies
 pip install -r requirements.txt
 
-4. Set Environment Variables
+4.Set Environment Variables
 Create a .env file in your project root and add:
 SECRET_KEY=your-secret-key
 MONGO_URI=mongodb+srv://antoniawittrin_db_user:Musikerin911%21@cluster0.1nyxnng.mongodb.net/girlmath?retryWrites=true&w=majority&appName=Cluster0
 
-5.	Run the Application
+5.Run the Application
 flask run or python app.py
 
 ⸻
-
 Deployment on Render:
-1.	Push your latest code to GitHub:
+1.Push your latest code to GitHub:
 git add .
 git commit -m "MongoDB integration and Render deployment"
 git push origin main
 
-2.	Go to Render.com → Create a New Web Service
+2.Go to Render.com → Create a New Web Service
 → Connect your GitHub repository
 → Select Python 3.13 as your environment
 
-3.	Add the following Environment Variables under “Environment”:
+3.Add the following Environment Variables under “Environment”:
 MONGO_URI=mongodb+srv://antoniawittrin_db_user:Musikerin911%21@cluster0.1nyxnng.mongodb.net/girlmath?retryWrites=true&w=majority&appName=Cluster0
 SECRET_KEY=p9zK3D7sY2hQ1vJ8tR5mN4eX6aB0cL2fW3gU8oV9pS4qT7rH1z
 PYTHON_VERSION=3.13.0
 
-4.	Save and Deploy 
+4.Save and Deploy 
 Render will automatically build and launch your Flask app.
 
 ⸻
-Security & Privacy:
+##Security & Privacy (SE_09):
 
 The app implements several key security principles:
 	•	Authentication & Authorization — users can only access their own transactions and goals.
@@ -117,8 +116,7 @@ The app implements several key security principles:
 	•	Session Security — Flask sessions are protected with a secret key and automatic logout option.
 
 ⸻
-
- Mobile Optimization:
+##Mobile Optimization (SE_19):
 
 The site is fully responsive and adjusts layout elements for mobile devices:
 	•	Sidebar collapses into a top navigation bar.
@@ -127,7 +125,6 @@ The site is fully responsive and adjusts layout elements for mobile devices:
 
 ⸻
 
-🧩 Software Development Process:
 
 Throughout the project:
 	•	Version control via Git & GitHub.
