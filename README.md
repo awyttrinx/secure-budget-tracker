@@ -56,31 +56,57 @@ Features:
 
 ⸻
 
-Technologies Used:
+🚀 Tech Stack:
+	•	Frontend: HTML, CSS (custom responsive design)
+	•	Backend: Flask (Python 3.13)
+	•	Database: MongoDB Atlas
+	•	Hosting: Render.com
+	•	Authentication: Flask-Login + Werkzeug Security
+	•	CSRF-Schutz: Flask-WTF
 
-Frontend:
-	•	HTML5
-	•	CSS3 (mobile responsive design)
-	•	Jinja2 templates
+⸻
+Local Development Setup
+1.	Clone the Repository
+git clone https://github.com/<your-username>/secure-budget-tracker.git
+cd secure-budget-tracker
 
-Backend:
-	•	Python (Flask Framework)
-	•	SQLite (local database)
+2.	Create & Activate a Virtual Environment
+python3 -m venv venv
+source venv/bin/activate
 
-Security & Libraries:
-	•	Flask-Login — Authentication
-	•	Flask-WTF — CSRF protection
-	•	Werkzeug — Password hashing
-	•	SQLAlchemy — ORM for database
-	•	gunicorn — Production server (for Render deployment)
+3. Install Dependencies
+pip install -r requirements.txt
 
-Deployment:
-	•	Hosted via Render.com
-	•	Repository managed on GitHub
+4. Set Environment Variables
+Create a .env file in your project root and add:
+SECRET_KEY=your-secret-key
+MONGO_URI=mongodb+srv://antoniawittrin_db_user:Musikerin911%21@cluster0.1nyxnng.mongodb.net/girlmath?retryWrites=true&w=majority&appName=Cluster0
+
+5.	Run the Application
+flask run or python app.py
 
 ⸻
 
- Security & Privacy (SE_09):
+Deployment on Render:
+1.	Push your latest code to GitHub:
+git add .
+git commit -m "MongoDB integration and Render deployment"
+git push origin main
+
+2.	Go to Render.com → Create a New Web Service
+→ Connect your GitHub repository
+→ Select Python 3.13 as your environment
+
+3.	Add the following Environment Variables under “Environment”:
+MONGO_URI=mongodb+srv://antoniawittrin_db_user:Musikerin911%21@cluster0.1nyxnng.mongodb.net/girlmath?retryWrites=true&w=majority&appName=Cluster0
+SECRET_KEY=p9zK3D7sY2hQ1vJ8tR5mN4eX6aB0cL2fW3gU8oV9pS4qT7rH1z
+PYTHON_VERSION=3.13.0
+
+4.	Save and Deploy 
+Render will automatically build and launch your Flask app.
+
+⸻
+Security & Privacy:
 
 The app implements several key security principles:
 	•	Authentication & Authorization — users can only access their own transactions and goals.
@@ -92,7 +118,7 @@ The app implements several key security principles:
 
 ⸻
 
- Mobile Optimization (SE_19):
+ Mobile Optimization:
 
 The site is fully responsive and adjusts layout elements for mobile devices:
 	•	Sidebar collapses into a top navigation bar.
@@ -101,7 +127,7 @@ The site is fully responsive and adjusts layout elements for mobile devices:
 
 ⸻
 
-🧩 Software Development Process (SE_01):
+🧩 Software Development Process:
 
 Throughout the project:
 	•	Version control via Git & GitHub.
