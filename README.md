@@ -105,7 +105,7 @@ PYTHON_VERSION=3.13.0
 Render will automatically build and launch your Flask app.
 
 ⸻
-##Security & Privacy (SE_09):
+##Security & Privacy:
 
 The app implements several key security principles:
 	•	Authentication & Authorization — users can only access their own transactions and goals.
@@ -116,7 +116,7 @@ The app implements several key security principles:
 	•	Session Security — Flask sessions are protected with a secret key and automatic logout option.
 
 ⸻
-##Mobile Optimization (SE_19):
+##Mobile Optimization:
 
 The site is fully responsive and adjusts layout elements for mobile devices:
 	•	Sidebar collapses into a top navigation bar.
