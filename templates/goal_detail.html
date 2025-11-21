@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Goal Details | GirlMath{% endblock %}
+{% block header %}{{ goal.name }} 🎯{% endblock %}
+
+{% block content %}
+<section class="goal-detail">
+  <h2>{{ goal.name }}</h2>
+  <p><strong>Target:</strong> ${{ "%.2f"|format(goal.target) }}</p>
+  <p><strong>Saved:</strong> ${{ "%.2f"|format(goal.saved) }}</p>
+  <p><strong>Progress:</strong> {{ "%.1f"|format((goal.saved / goal.target) * 100 if goal.target > 0 else 0) }}%</p>
+
+  <div class="progress-bar">
+    <div class="progress" style="width: {{ (goal.saved / goal.target) * 100 if goal.target > 0 else 0 }}%;"></div>
+  </div>
+
+  <a href="{{ url_for('goals') }}" class="back-btn">← Back to all goals</a>
+</section>
+{% endblock %}

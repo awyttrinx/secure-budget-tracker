@@ -255,6 +255,14 @@ def logout():
     flash("You’ve been logged out.", "info")
     return redirect(url_for("login"))
 
+@app.route("/goal/<id>")
+@login_required
+def goal_detail(id):
+    goal = mongo.db.goals.find_one({"_id": ObjectId(id), "user_id": current_user.id})
+    if not goal:
+        flash("Goal not found!", "error")
+        return redirect(url_for("goals"))
+    return render_template("goal_detail.html", goal=goal)
 
 # ---------------- ERROR HANDLERS ---------------- #
 @app.errorhandler(404)
